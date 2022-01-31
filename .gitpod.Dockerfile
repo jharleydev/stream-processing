@@ -5,7 +5,6 @@ RUN pip3 install pulumi_kubernetes flask pulumi && \
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl 
 
 RUN npm install -g typescript
-RUN brew update
 RUN curl -s -L "https://github.com/loft-sh/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-arm64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace 
 RUN sudo mv devspace /usr/local/bin 
 RUN wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash && 
