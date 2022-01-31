@@ -1,19 +1,16 @@
 FROM gitpod/workspace-full:latest
-
-RUN curl -fsSL https://get.pulumi.com | sh -s  && \
-    sudo -H /usr/bin/pip3 install pulumi_kubernetes flask pulumi && \
-    pip3 install pulumi_kubernetes flask pulumi && \
+RUN pip3 install flask  && \
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl && \
-    npm install -g typescript
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl 
 
-RUN brew update && brew install azure-cli
-
-# Install .NET SDK (Current channel)
-# Source: https://docs.microsoft.com/dotnet/core/install/linux-scripted-manual#scripted-install
-RUN mkdir -p /home/gitpod/dotnet && curl -fsSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel Current --install-dir /home/gitpod/dotnet
-ENV DOTNET_ROOT=/home/gitpod/dotnet
-ENV PATH=$PATH:/home/gitpod/dotnet
+RUN npm install -g typescript
+RUN curl -s -L "https://github.com/loft-sh/devspace/releases/latest" | sed -nE 's!.*"([^"]*devspace-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace 
+RUN sudo mv devspace /usr/local/bin 
+RUN wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash 
+RUN curl -s -L "https://github.com/loft-sh/vcluster/releases/latest" | sed -nE 's!.*"([^"]*vcluster-linux-amd64)".*!https://github.com\1!p' | xargs -n 1 curl -L -o vcluster && chmod +x vcluster
+RUN sudo mv vcluster /usr/local/bin
+RUN brew install kind 
+RUN brew install gh
 
 ENV PATH="${PATH}:/home/gitpod/.pulumi/bin"
 ENV PIP_USER=no
