@@ -1,0 +1,10 @@
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: 
+  namespace: ambassador
+spec:
+  hostname: ""
+  acmeProvider:
+    authority: None
