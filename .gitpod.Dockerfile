@@ -1,4 +1,4 @@
-FROM gitpod/workspace-python
+FROM gitpod/workspace:latest
 
 RUN pip3 install flask  && \
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
