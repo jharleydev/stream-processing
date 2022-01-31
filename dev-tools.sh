@@ -6,3 +6,4 @@ curl -s -L "https://github.com/loft-sh/vcluster/releases/latest" | sed -nE 's!.*
 sudo mv vcluster /usr/local/bin 
 brew install kind 
 brew install gh
+brew install argocd
