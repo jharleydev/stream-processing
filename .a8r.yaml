@@ -1,0 +1,5 @@
+k8s_config:
+- manifest_path: /manifest
+  cluster_info:
+    cluster_id: 5ed25b81-ac0b-5db7-a24e-db2291b8eed3
+    cluster_name: kind cluster
